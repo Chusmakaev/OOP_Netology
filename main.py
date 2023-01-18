@@ -13,6 +13,19 @@ class Mentor:
         self.name = surname
         self.courses_attached = []
 
+class Lecturer(Mentor):
+    def __init__(self, name, surname):
+        self.name = name
+        self.name = surname
+        self.courses_attached = []
+
+class Reviewer(Mentor):
+    def __init__(self, name, surname):
+        self.name = name
+        self.name = surname
+        self.courses_attached = []
+
+
 best_student = Student('Iron', 'man', '35')
 best_student.finished_courses += ['Git']
 best_student.courses_in_progress += ['Python']
