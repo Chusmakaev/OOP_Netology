@@ -16,12 +16,12 @@ class Student:
         Курсы в процессе изучения: Python, Git
         Завершенные курсы: Введение в программирование"""
 
-        grades_num = 0
+        grades_count = 0
         courses_in_progress_string = ', '.join(self.courses_in_progress)
         finished_courses_string = ', '.join(self.finished_courses)
         for q in self.grades:
-            grades_num += len(self.grades[q])
-        self.average_rating = sum(map(sum, self.grades.values())) / grades_num
+            grades_count += len(self.grades[q])
+        self.average_rating = sum(map(sum, self.grades.values())) / grades_count
         res = f'Имя: {self.name}\n' \
               f'Фамилия: {self.surname}\n' \
               f'Средняя оценка за домашнее задание: {self.average_rating}\n' \
@@ -46,29 +46,30 @@ class Student:
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
-        self.name = surname
+        self.surname = surname
         self.courses_attached = []
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
         """self.name = name
-        self.name = surname
+        self.surname = surname
         self.courses_attached = []"""
 
         super().__init__(name, surname)
         self.average_rating = float()
         self.grades = {}
-    def __str__(self):
-        """print(some_lecturer)
-        Имя: Some
-        Фамилия: Buddy
-        Средняя оценка за лекции: 9.9"""
 
-        grades_num = 0
-        for q in self.grades:
-            grades_num += len(self.grades[q])
-        self.average_rating = sum(map(sum, self.grades.values())) / grades_num
-        res = f'Имя : {self.name}\n Фамилия: {self.surname}\n Средняя оценка за лекции: {self.average_rating}'
+    def __str__(self):
+        """Возвращает характеристики экземпляра класса вида:
+            print(some_reviewer)
+            Имя: Some
+            Фамилия: Buddy
+        """
+        grades_count = 0
+        for k in self.grades:
+            grades_count += len(self.grades[k])
+        self.average_rating = sum(map(sum, self.grades.values())) / grades_count
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.average_rating}'
         return res
 
     def __lt__(self, other):
@@ -99,11 +100,14 @@ class Reviewer(Mentor):
 
 
 #Создаем список Лекторов
-best_lecturer_1 = Lecturer('Iron', 'Man')
+best_lecturer_1 = Lecturer('Ivan', 'Ivanov')
 best_lecturer_1.courses_attached += ['Python']
 
-best_lecturer_2 = Lecturer('We are', 'Venome')
+best_lecturer_2 = Lecturer('Petr', 'Petrov')
 best_lecturer_2.courses_attached += ['Java']
+
+best_lecturer_3 = Lecturer('Semen', 'Zarev')
+best_lecturer_3.courses_attached += ['Python']
 
 #Создаем список Проверяющих
 cool_reviewer_1 = Reviewer('Peter', 'Parker')
@@ -113,6 +117,10 @@ cool_reviewer_1.courses_attached += ['Java']
 cool_reviewer_2 = Reviewer('Will', 'Smith')
 cool_reviewer_2.courses_attached += ['Java']
 cool_reviewer_2.courses_attached += ['Python']
+
+cool_reviewer_3 = Reviewer('Dead', 'Shoot')
+cool_reviewer_3.courses_attached += ['Java']
+cool_reviewer_3.courses_attached += ['Python']
 
 
 #Cоздаем список Менторов
@@ -130,9 +138,13 @@ best_student_1.finished_courses += ['Git']
 best_student_1.courses_in_progress += ['Python']
 
 
-best_student_2 = Student('Iron', 'man', '35')
+best_student_2 = Student('Spider', 'man', '35')
 best_student_2.finished_courses += ['Java']
 best_student_2.courses_in_progress += ['Python']
+
+best_student_3 = Student('Mr', 'Ravil', '26')
+best_student_3.finished_courses += ['Git']
+best_student_3.courses_in_progress += ['Python']
 
 #Выставление оценок Студентам
 best_student_1.grades ['Git'] = [10, 10, 10, 10, 10]
@@ -140,6 +152,9 @@ best_student_1.grades ['Python'] = [10, 10]
 
 best_student_2.grades ['Git'] = [10, 10, 5, 5, 5]
 best_student_2.grades ['Python'] = [10, 7]
+
+best_student_3.grades ['Git'] = [10, 10, 10, 5, 5]
+best_student_3.grades ['Python'] = [10, 7]
 
 #Выставление оценок Лекторам
 best_student_1.rate_hw(best_lecturer_1, 'Git', 10)
@@ -151,6 +166,9 @@ best_student_2.rate_hw(best_lecturer_2, 'Java', 7)
 best_student_2.rate_hw(best_lecturer_2, 'Java', 10)
 best_student_2.rate_hw(best_lecturer_2, 'Java', 8)
 
+best_student_3.rate_hw(best_lecturer_3, 'Java', 7)
+best_student_3.rate_hw(best_lecturer_3, 'Java', 6)
+best_student_3.rate_hw(best_lecturer_3, 'Java', 8)
 
 #Выставление оценок Студентам
 cool_reviewer_1.rate_hw(best_student_1, 'Git', 10)
@@ -162,8 +180,63 @@ cool_reviewer_2.rate_hw(best_student_2, 'Python', 5)
 cool_reviewer_2.rate_hw(best_student_2, 'Python', 6)
 cool_reviewer_2.rate_hw(best_student_2, 'Python', 9)
 
+cool_reviewer_3.rate_hw(best_student_3, 'Python', 5)
+cool_reviewer_3.rate_hw(best_student_3, 'Python', 6)
+cool_reviewer_3.rate_hw(best_student_3, 'Python', 9)
 
 
+print(f'Перечень студентов: \n\n{best_student_1}\n\n{best_student_2}\n\n{best_student_3}')
+print()
+print()
+
+print(f'Перечень лекторов:\n\n{best_lecturer_1}\n\n{best_lecturer_2}\n\n{best_lecturer_3}')
+print()
+print()
+
+print(f'Сравнение студентов:'
+      f'{best_student_1.name} {best_student_1.surname} < {best_student_2.name} {best_student_2.surname} = {best_student_1 > best_student_2}')
+print()
+
+print(f'Результат сравнения лекторов (по средним оценкам за лекции): '
+      f'{best_lecturer_1.name} {best_lecturer_1.surname} < {best_lecturer_2.name} {best_lecturer_2.surname} = {best_lecturer_1 > best_lecturer_2}')
+print()
+
+student_list = [best_student_1, best_student_2, best_student_3]
+
+lecturer_list = [best_lecturer_1, best_lecturer_2, best_lecturer_3]
+
+def student_rating(student_list, course_name):
+    """Функция для подсчета средней оценки за домашние задания
+    по всем студентам в рамках конкретного курса
+    в качестве аргументов принимает список студентов и название курса"""
+
+    sum_all = 0
+    count_all = 0
+    for stud in student_list:
+       if stud.courses_in_progress == [course_name]:
+            sum_all += stud.average_rating
+            count_all += 1
+    average_for_all = sum_all / count_all
+    return average_for_all
+
+def lecturer_rating(lecturer_list, course_name):
+    """Функция для подсчета средней оценки за лекции всех лекторов в рамках курса
+     в качестве аргумента принимает список лекторов и название курса"""
+
+    sum_all = 0
+    count_all = 0
+    for lect in lecturer_list:
+        if lect.courses_attached == [course_name]:
+            sum_all += lect.average_rating
+            count_all += 1
+    average_for_all = sum_all / count_all
+    return average_for_all
+
+print(f"Средняя оценка для всех студентов по курсу {'Python'}: {student_rating(student_list, 'Python')}")
+print()
+
+print(f"Средняя оценка для всех лекторов по курсу {'Python'}: {lecturer_rating(lecturer_list, 'Python')}")
+print()
 
 
 
