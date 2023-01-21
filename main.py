@@ -68,7 +68,11 @@ class Lecturer(Mentor):
         grades_count = 0
         for k in self.grades:
             grades_count += len(self.grades[k])
-        self.average_rating = sum(map(sum, self.grades.values())) / grades_count
+        #исключение пробелемы ZeroDivisionError
+        try:
+            self.average_rating = sum(map(sum, self.grades.values())) / grades_count
+        except ZeroDivisionError:
+            grades_count = 0
         res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.average_rating}'
         return res
 
@@ -80,6 +84,7 @@ class Lecturer(Mentor):
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
+        super().__init__(name, surname)
         self.name = name
         self.name = surname
         self.courses_attached = []
@@ -100,14 +105,14 @@ class Reviewer(Mentor):
 
 
 #Создаем список Лекторов
-best_lecturer_1 = Lecturer('Ivan', 'Ivanov')
+best_lecturer_1 = Lecturer('Mr', 'Blaide')
 best_lecturer_1.courses_attached += ['Python']
 
-best_lecturer_2 = Lecturer('Petr', 'Petrov')
-best_lecturer_2.courses_attached += ['Java']
+best_lecturer_2 = Lecturer('Cap', 'America')
+best_lecturer_2.courses_attached += ['Git']
 
-best_lecturer_3 = Lecturer('Semen', 'Zarev')
-best_lecturer_3.courses_attached += ['Python']
+best_lecturer_3 = Lecturer('Ghost', 'Rider')
+best_lecturer_3.courses_attached += ['Java']
 
 #Создаем список Проверяющих
 cool_reviewer_1 = Reviewer('Peter', 'Parker')
@@ -140,11 +145,11 @@ best_student_1.courses_in_progress += ['Python']
 
 best_student_2 = Student('Spider', 'man', '35')
 best_student_2.finished_courses += ['Java']
-best_student_2.courses_in_progress += ['Python']
+best_student_2.courses_in_progress += ['Git']
 
 best_student_3 = Student('Mr', 'Ravil', '26')
 best_student_3.finished_courses += ['Git']
-best_student_3.courses_in_progress += ['Python']
+best_student_3.courses_in_progress += ['Java']
 
 #Выставление оценок Студентам
 best_student_1.grades ['Git'] = [10, 10, 10, 10, 10]
@@ -157,14 +162,14 @@ best_student_3.grades ['Git'] = [10, 10, 10, 5, 5]
 best_student_3.grades ['Python'] = [10, 7]
 
 #Выставление оценок Лекторам
-best_student_1.rate_hw(best_lecturer_1, 'Git', 10)
-best_student_1.rate_hw(best_lecturer_1, 'Git', 6)
-best_student_1.rate_hw(best_lecturer_1, 'Git', 5)
+best_student_1.rate_hw(best_lecturer_1, 'Python', 10)
+best_student_1.rate_hw(best_lecturer_1, 'Python', 6)
+best_student_1.rate_hw(best_lecturer_1, 'Python', 5)
 
 
-best_student_2.rate_hw(best_lecturer_2, 'Java', 7)
-best_student_2.rate_hw(best_lecturer_2, 'Java', 10)
-best_student_2.rate_hw(best_lecturer_2, 'Java', 8)
+best_student_2.rate_hw(best_lecturer_2, 'Git', 7)
+best_student_2.rate_hw(best_lecturer_2, 'Git', 10)
+best_student_2.rate_hw(best_lecturer_2, 'Git', 8)
 
 best_student_3.rate_hw(best_lecturer_3, 'Java', 7)
 best_student_3.rate_hw(best_lecturer_3, 'Java', 6)
