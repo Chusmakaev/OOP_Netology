@@ -176,18 +176,18 @@ best_student_3.rate_hw(best_lecturer_3, 'Java', 6)
 best_student_3.rate_hw(best_lecturer_3, 'Java', 8)
 
 #Выставление оценок Студентам
-cool_reviewer_1.rate_hw(best_student_1, 'Git', 10)
-cool_reviewer_1.rate_hw(best_student_1, 'Git', 3)
-cool_reviewer_1.rate_hw(best_student_1, 'Git', 4)
+cool_reviewer_1.rate_hw(best_student_1, 'Python', 10)
+cool_reviewer_1.rate_hw(best_student_1, 'Python', 3)
+cool_reviewer_1.rate_hw(best_student_1, 'Python', 4)
 
 
-cool_reviewer_2.rate_hw(best_student_2, 'Python', 5)
-cool_reviewer_2.rate_hw(best_student_2, 'Python', 6)
-cool_reviewer_2.rate_hw(best_student_2, 'Python', 9)
+cool_reviewer_2.rate_hw(best_student_2, 'Git', 5)
+cool_reviewer_2.rate_hw(best_student_2, 'Git', 6)
+cool_reviewer_2.rate_hw(best_student_2, 'Git', 9)
 
-cool_reviewer_3.rate_hw(best_student_3, 'Python', 5)
-cool_reviewer_3.rate_hw(best_student_3, 'Python', 6)
-cool_reviewer_3.rate_hw(best_student_3, 'Python', 9)
+cool_reviewer_3.rate_hw(best_student_3, 'Java', 5)
+cool_reviewer_3.rate_hw(best_student_3, 'Java', 6)
+cool_reviewer_3.rate_hw(best_student_3, 'Java', 9)
 
 
 print(f'Перечень студентов: \n\n{best_student_1}\n\n{best_student_2}\n\n{best_student_3}')
